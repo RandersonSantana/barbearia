@@ -2,7 +2,7 @@ package com.barbearia.models;
 
 import jakarta.persistence.*;
 
-import java.util.Objects;
+import java.util.List;
 
 @Entity
 @Table(name = "barbeiro")
@@ -20,67 +20,78 @@ public class Barbeiro {
 
     private boolean ativo;
 
+
+    @OneToMany(mappedBy = "barbeiro", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Agendamento> agendamentos;
+
     public Barbeiro() {
     }
 
-    public Barbeiro(Long id, String nome, String telefone, String email, boolean ativo) {
+    public Barbeiro(Long id, String nome, String telefone, String email, boolean ativo, List<Agendamento> agendamentos) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
         this.ativo = ativo;
+        this.agendamentos = agendamentos;
     }
 
     public Long getId() {
+
         return id;
     }
 
     public void setId(Long id) {
+
         this.id = id;
     }
 
     public String getNome() {
+
         return nome;
     }
 
     public void setNome(String nome) {
+
         this.nome = nome;
     }
 
     public String getTelefone() {
+
         return telefone;
     }
 
     public void setTelefone(String telefone) {
+
         this.telefone = telefone;
     }
 
     public String getEmail() {
+
         return email;
     }
 
     public void setEmail(String email) {
+
         this.email = email;
     }
 
     public boolean isAtivo() {
+
         return ativo;
     }
 
     public void setAtivo(boolean ativo) {
+
         this.ativo = ativo;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Barbeiro barbeiro = (Barbeiro) o;
-        return Objects.equals(id, barbeiro.id);
+    public List<Agendamento> getAgendamentos() {
+        return agendamentos;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
+    public void setAgendamentos(List<Agendamento> agendamentos) {
+        this.agendamentos = agendamentos;
     }
+
 }

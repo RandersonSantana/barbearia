@@ -1,21 +1,25 @@
 package com.barbearia.dtos;
 
+import com.barbearia.enums.Perfil;
 
+import java.util.List;
 
-public class ClienteDTO {
+public class UsuarioDTO {
     private Long id;
     private String nome;
     private String telefone;
     private String email;
+    private List<Perfil> perfis;
 
-
-    public ClienteDTO(Long id, String nome, String telefone, String email) {
+    public UsuarioDTO(Long id, String nome, String telefone, String email, List<Perfil> perfis) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
+        this.perfis = perfis;
     }
-    public ClienteDTO() {
+
+    public UsuarioDTO() {
     }
 
     public Long getId() {
@@ -48,5 +52,13 @@ public class ClienteDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Perfil> getPerfis() {
+        return perfis;
+    }
+
+    public void setPerfis(List<Perfil> perfis) {
+        this.perfis = perfis;
     }
 }

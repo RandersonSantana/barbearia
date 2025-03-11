@@ -1,17 +1,17 @@
 package com.barbearia.models;
 
+import com.barbearia.enums.Perfil;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.Objects;
+
 @Getter
 @Setter
 @Entity
-@Table(name = "clientes")
-public class Cliente {
+@Table(name = "usuarios")
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,15 +23,22 @@ public class Cliente {
     @Column(unique = true)
     private String email;
 
-    public  Cliente() {
+    @Enumerated(EnumType.STRING)
+    private List<Perfil> perfis;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Agendamento> agendamentos;
+
+    public Usuario() {
     }
 
-    public Cliente(Long id, String nome, String telefone, String email) {
+    public Usuario(Long id, String nome, String telefone, String email, List<Perfil> perfis, List<Agendamento> agendamentos) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
-
+        this.perfis = perfis;
+        this.agendamentos = agendamentos;
     }
 
     public Long getId() {
@@ -64,5 +71,21 @@ public class Cliente {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Agendamento> getAgendamentos() {
+        return agendamentos;
+    }
+
+    public void setAgendamentos(List<Agendamento> agendamentos) {
+        this.agendamentos = agendamentos;
+    }
+
+    public List<Perfil> getPerfis() {
+        return perfis;
+    }
+
+    public void setPerfis(List<Perfil> perfis) {
+        this.perfis = perfis;
     }
 }

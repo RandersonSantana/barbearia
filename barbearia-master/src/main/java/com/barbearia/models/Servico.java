@@ -19,6 +19,9 @@ public class Servico {
 
     private Double preco;
 
+    @OneToMany(mappedBy = "servico", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Agendamento> agendamentos;
+
     public Servico(){}
 
     public Servico(Long id, String nome, String descricao, Double preco) {

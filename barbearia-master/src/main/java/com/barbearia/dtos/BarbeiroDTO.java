@@ -1,7 +1,8 @@
 package com.barbearia.dtos;
 
+import com.barbearia.enums.Perfil;
+
 import java.util.List;
-import java.util.Objects;
 
 public class BarbeiroDTO {
     private Long id;
@@ -13,12 +14,13 @@ public class BarbeiroDTO {
 
     public BarbeiroDTO() {}
 
-    public BarbeiroDTO(Long id, String nome, String telefone, String email, boolean ativo) {
+    public BarbeiroDTO(Long id, String nome, String telefone, String email, boolean ativo, List<Long> agendamentosIds) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
         this.ativo = ativo;
+        this.agendamentosIds = agendamentosIds;
     }
 
     public Long getId() {
@@ -61,16 +63,11 @@ public class BarbeiroDTO {
         this.ativo = ativo;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BarbeiroDTO that = (BarbeiroDTO) o;
-        return Objects.equals(id, that.id);
+    public List<Long> getAgendamentosIds() {
+        return agendamentosIds;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
+    public void setAgendamentosIds(List<Long> agendamentosIds) {
+        this.agendamentosIds = agendamentosIds;
     }
 }

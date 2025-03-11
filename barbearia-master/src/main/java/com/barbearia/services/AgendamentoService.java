@@ -21,7 +21,7 @@ public class AgendamentoService {
     public AgendamentoDTO converterAgendamentoParaDTO(Agendamento agendamento) {
         AgendamentoDTO agendamentoDTO = new AgendamentoDTO();
         agendamentoDTO.setId(agendamento.getId());
-        agendamentoDTO.setData(agendamento.getData());
+        
         agendamentoDTO.setHora(agendamento.getHora());
         return agendamentoDTO;
     }

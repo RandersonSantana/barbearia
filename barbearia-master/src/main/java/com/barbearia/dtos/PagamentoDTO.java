@@ -1,14 +1,6 @@
-package com.barbearia.models;
+package com.barbearia.dtos;
 
-import jakarta.persistence.*;
-
-import java.util.Objects;
-
-@Entity
-@Table(name = "pagamentos")
-public class Pagamento {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PagamentoDTO {
     private Long id;
 
     private Double valor;
@@ -17,17 +9,16 @@ public class Pagamento {
 
     private String status;
 
-    @OneToOne
-    @JoinColumn(name = "agendamento_id", nullable = false)
-    private Agendamento agendamento;
+    private Long agendamentoId;
 
-    public Pagamento(){}
+    public PagamentoDTO(Long id, Double valor, String metodo, String status){}
 
-    public Pagamento(Long id, Double valor, String metodo, String status) {
+    public PagamentoDTO(Long id, Double valor, String metodo, String status, Long agendamentoId) {
         this.id = id;
         this.valor = valor;
         this.metodo = metodo;
         this.status = status;
+        this.agendamentoId = agendamentoId;
     }
 
     public Long getId() {
@@ -62,16 +53,11 @@ public class Pagamento {
         this.status = status;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Pagamento pagamento = (Pagamento) o;
-        return Objects.equals(id, pagamento.id);
+    public Long getAgendamentoId() {
+        return agendamentoId;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
+    public void setAgendamentoId(Long agendamentoId) {
+        this.agendamentoId = agendamentoId;
     }
 }
