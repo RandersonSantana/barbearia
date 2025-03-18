@@ -11,15 +11,15 @@ public class UsuarioDTO {
     private String email;
     private List<Perfil> perfis;
 
+    public UsuarioDTO() {
+    }
+
     public UsuarioDTO(Long id, String nome, String telefone, String email, List<Perfil> perfis) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
         this.perfis = perfis;
-    }
-
-    public UsuarioDTO() {
     }
 
     public Long getId() {

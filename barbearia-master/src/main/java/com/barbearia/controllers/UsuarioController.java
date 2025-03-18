@@ -16,19 +16,15 @@ public class UsuarioController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<UsuarioDTO> getUsuarioById(@PathVariable Long id){
-        return ResponseEntity.ok(usuarioService.getUsuarioById(id));
-    }
-    @GetMapping
-    public ResponseEntity<List<UsuarioDTO>> getAllUsuario() {
-        return ResponseEntity.ok(usuarioService.getAllUsuario());
+        return ResponseEntity.ok(usuarioService.buscarUsuarioDTOPorId(id));
     }
     @PostMapping
-    public ResponseEntity<UsuarioDTO> createUsuario(@RequestBody UsuarioDTO usuarioDTO) {
-        return ResponseEntity.ok(usuarioService.createUsuario(usuarioDTO));
+    public ResponseEntity<UsuarioDTO> cadastrarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        return ResponseEntity.ok(usuarioService.cadastrarUsuario(usuarioDTO));
     }
     @PutMapping()
-    public ResponseEntity<UsuarioDTO> updateUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
-        return ResponseEntity.ok(usuarioService.updateUsuario(usuarioDTO));
+    public ResponseEntity<UsuarioDTO> atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
+        return ResponseEntity.ok(usuarioService.atualizarUsuario(usuarioDTO));
     }
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteUsuario(@PathVariable Long id) {

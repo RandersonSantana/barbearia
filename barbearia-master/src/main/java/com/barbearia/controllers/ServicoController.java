@@ -16,7 +16,7 @@ public class ServicoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ServicoDTO> buscarServicoPorId(@PathVariable Long id){
-        return ResponseEntity.ok(servicoService.buscarServicoPorId(id));
+        return ResponseEntity.ok(servicoService.buscarServicoDTOPorId(id));
     }
     @GetMapping
     public ResponseEntity<List<ServicoDTO>> buscarTodosServico(){

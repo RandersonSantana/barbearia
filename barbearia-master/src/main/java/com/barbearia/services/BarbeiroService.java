@@ -37,7 +37,6 @@ public class BarbeiroService {
         return barbeiro;
     }
     public BarbeiroDTO cadastrarBarbeiro(BarbeiroDTO barbeiroDTO){
-        barbeiroDTO.setId(null);
         Barbeiro barbeiro = converterBarbeiroDTOParaBarbeiro(barbeiroDTO);
         barbeiro = barbeiroRepository.save(barbeiro);
         return converterBarbeiroParaBarbeiroDTO(barbeiro);
@@ -61,13 +60,17 @@ public class BarbeiroService {
         return barbeiroDTOs;
     }
 
-    public BarbeiroDTO buscarBarbeiroPorId(Long id){
+    public BarbeiroDTO buscarBarbeiroDTOPorId(Long id){
+        return converterBarbeiroParaBarbeiroDTO(buscarBarbeiroPorId(id));
+    }
 
+    public Barbeiro buscarBarbeiroPorId(Long id){
         Barbeiro barbeiro = barbeiroRepository.findById(id)
                 .orElseThrow(() -> new BusinesException(MSG_BARBEIRO));
-
-        return converterBarbeiroParaBarbeiroDTO(barbeiro);
+        return barbeiro;
     }
+
+
     public  void deletarBarbeiro(Long id){
         barbeiroRepository.deleteById(id);
     }

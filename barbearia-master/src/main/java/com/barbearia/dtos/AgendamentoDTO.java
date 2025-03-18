@@ -1,5 +1,7 @@
 package com.barbearia.dtos;
 
+import com.barbearia.models.Usuario;
+
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -49,7 +51,6 @@ public class AgendamentoDTO {
     public Long getUsuarioId() {
         return usuarioId;
     }
-
     public void setUsuarioId(Long usuarioId) {
         this.usuarioId = usuarioId;
     }
@@ -69,4 +70,5 @@ public class AgendamentoDTO {
     public void setServicoId(Long servicoId) {
         this.servicoId = servicoId;
     }
+
 }

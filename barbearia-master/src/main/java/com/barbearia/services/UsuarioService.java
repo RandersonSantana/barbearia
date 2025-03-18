@@ -7,10 +7,6 @@ import com.barbearia.repositories.UsuarioRepository;
 import com.barbearia.spec.UsuarioSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class UsuarioService {
@@ -22,13 +18,15 @@ public class UsuarioService {
     @Autowired
     private UsuarioSpec usuarioSpec;
 
-    @Transactional(readOnly = true)
-    public UsuarioDTO getUsuarioById(Long id){
+    public UsuarioDTO buscarUsuarioDTOPorId(Long id){
+        return converterUsuarioParaUsuarioDTO(buscarUsuarioPorId(id));
+    }
 
+    public Usuario buscarUsuarioPorId(Long id){
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new BusinesException(MSG_CLIENTE));
 
-        return converterUsuarioParaUsuarioDTO(usuario);
+        return usuario;
     }
 
     public UsuarioDTO converterUsuarioParaUsuarioDTO(Usuario usuario) {
@@ -47,23 +45,12 @@ public class UsuarioService {
         usuario.setTelefone(usuarioDTO.getTelefone());
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setPerfis(usuarioDTO.getPerfis());
+
+
         return usuario;
     }
+    public UsuarioDTO cadastrarUsuario(UsuarioDTO usuarioDTO){
 
-    @Transactional(readOnly = true)
-    public List<UsuarioDTO> getAllUsuario(){
-        List<Usuario> result = usuarioRepository.findAll();
-        List<UsuarioDTO> usuarioDTO = new ArrayList<>();
-        for (Usuario usuario : result){
-            usuarioDTO.add(new UsuarioDTO(usuario.getId(), usuario.getNome(), usuario.getTelefone(), usuario.getEmail(), usuario.getPerfis()));
-        }
-        return usuarioDTO;
-    }
-
-    @Transactional
-    public UsuarioDTO createUsuario(UsuarioDTO usuarioDTO){
-
-        usuarioDTO.setId(null);
 
         Usuario UsuarioEmail = usuarioRepository.findByEmail(usuarioDTO.getEmail());
         usuarioSpec.verificarSeExisteUsuarioComEmailDuplicado(UsuarioEmail);
@@ -73,8 +60,7 @@ public class UsuarioService {
         return converterUsuarioParaUsuarioDTO(usuario);
     }
 
-    @Transactional
-    public UsuarioDTO updateUsuario(UsuarioDTO usuarioDTO){
+    public UsuarioDTO atualizarUsuario(UsuarioDTO usuarioDTO){
         Usuario usuario = usuarioRepository.findById(usuarioDTO.getId())
                 .orElseThrow(() -> new BusinesException(MSG_CLIENTE));
 

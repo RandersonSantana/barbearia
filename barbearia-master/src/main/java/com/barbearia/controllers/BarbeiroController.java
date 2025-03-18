@@ -17,7 +17,7 @@ public class BarbeiroController {
 
     @GetMapping("/{id}")
     public ResponseEntity<BarbeiroDTO> buscarBarbeiroPorId(@PathVariable Long id){
-        return ResponseEntity.ok(barbeiroService.buscarBarbeiroPorId(id));
+        return ResponseEntity.ok(barbeiroService.buscarBarbeiroDTOPorId(id));
     }
     @GetMapping
     public ResponseEntity<List<BarbeiroDTO>> buscarTodosBarbeiros(){

@@ -1,8 +1,13 @@
 package com.barbearia.services;
 
 import com.barbearia.dtos.AgendamentoDTO;
+import com.barbearia.dtos.UsuarioDTO;
 import com.barbearia.exceptions.BusinesException;
 import com.barbearia.models.Agendamento;
+import com.barbearia.models.Barbeiro;
+import com.barbearia.models.Servico;
+
+import com.barbearia.models.Usuario;
 import com.barbearia.repositories.AgendamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,10 +23,18 @@ public class AgendamentoService {
     @Autowired
     private AgendamentoRepository agendamentoRepository;
 
+    @Autowired
+    private BarbeiroService barbeiroService;
+
+    @Autowired
+    private ServicoService servicoService;
+
+    @Autowired
+    private UsuarioService usuarioService;
+
     public AgendamentoDTO converterAgendamentoParaDTO(Agendamento agendamento) {
         AgendamentoDTO agendamentoDTO = new AgendamentoDTO();
         agendamentoDTO.setId(agendamento.getId());
-        
         agendamentoDTO.setHora(agendamento.getHora());
         return agendamentoDTO;
     }
@@ -31,11 +44,19 @@ public class AgendamentoService {
         agendamento.setId(agendamentoDTO.getId());
         agendamento.setData(agendamentoDTO.getData());
         agendamento.setHora(agendamentoDTO.getHora());
+
+        Barbeiro barbeiro = barbeiroService.buscarBarbeiroPorId(agendamentoDTO.getBarbeiroId());
+        agendamento.setBarbeiro(barbeiro);
+
+        Servico servico = servicoService.buscarServicoPorId(agendamentoDTO.getServicoId());
+        agendamento.setServico(servico);
+
+        Usuario usuario = usuarioService.buscarUsuarioPorId(agendamentoDTO.getUsuarioId());
+        agendamento.setUsuario(usuario);
         return agendamento;
     }
 
     public AgendamentoDTO cadastrarAgendamento(AgendamentoDTO agendamentoDTO) {
-        agendamentoDTO.setId(null);
         Agendamento agendamento = converterAgendamentoDTOParaAgendamento(agendamentoDTO);
         agendamento = agendamentoRepository.save(agendamento);
         return converterAgendamentoParaDTO(agendamento);

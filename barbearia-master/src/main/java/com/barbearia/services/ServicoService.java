@@ -18,7 +18,6 @@ public class ServicoService {
     private ServicoRepository servicoRepository;
 
     public ServicoDTO cadastrarServico(ServicoDTO servicoDTO){
-        servicoDTO.setId(null);
         Servico servico = converterServicoDTOParaServico(servicoDTO);
         servico = servicoRepository.save(servico);
         return converterServicoParaServicoDTO(servico);
@@ -46,11 +45,13 @@ public class ServicoService {
         }
         return servicoDTO;
     }
-    public ServicoDTO buscarServicoPorId(Long id){
+    public ServicoDTO buscarServicoDTOPorId(Long id){
+        return converterServicoParaServicoDTO(buscarServicoPorId(id));
+    }
+    public Servico buscarServicoPorId(Long id){
         Servico servico = servicoRepository.findById(id)
                 .orElseThrow(() -> new BusinesException(MSG_SERVICO));
-
-        return converterServicoParaServicoDTO(servico);
+        return servico;
     }
     public  ServicoDTO atualizarServico( ServicoDTO servicoDTO){
         servicoRepository.findById(servicoDTO.getId())
