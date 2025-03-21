@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BarbeiroService {
@@ -18,7 +19,7 @@ public class BarbeiroService {
     private BarbeiroRepository barbeiroRepository;
 
 
-    public BarbeiroDTO converterBarbeiroParaBarbeiroDTO(Barbeiro barbeiro){
+    public BarbeiroDTO converterBarbeiroParaBarbeiroDTO(Optional<Barbeiro> barbeiro){
         BarbeiroDTO barbeiroDTO = new BarbeiroDTO();
         barbeiroDTO.setId(barbeiro.getId());
         barbeiroDTO.setNome(barbeiro.getNome());
@@ -60,14 +61,10 @@ public class BarbeiroService {
         return barbeiroDTOs;
     }
 
-    public BarbeiroDTO buscarBarbeiroDTOPorId(Long id){
-        return converterBarbeiroParaBarbeiroDTO(buscarBarbeiroPorId(id));
-    }
-
-    public Barbeiro buscarBarbeiroPorId(Long id){
+    public BarbeiroDTO buscarBarbeiroPorId(Long id){
         Barbeiro barbeiro = barbeiroRepository.findById(id)
                 .orElseThrow(() -> new BusinesException(MSG_BARBEIRO));
-        return barbeiro;
+        return converterBarbeiroParaBarbeiroDTO(barbeiro);
     }
 
 

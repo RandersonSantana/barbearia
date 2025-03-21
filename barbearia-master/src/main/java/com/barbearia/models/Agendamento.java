@@ -2,7 +2,6 @@ package com.barbearia.models;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.Objects;
@@ -37,14 +36,13 @@ public class Agendamento {
     public Agendamento() {
     }
 
-    public Agendamento(Long id, Date data, LocalTime hora, Usuario usuario, Barbeiro barbeiro, Servico servico, Pagamento pagamento) {
+    public Agendamento(Long id, Date data, LocalTime hora, Usuario usuario, Barbeiro barbeiro, Servico servico) {
         this.id = id;
         this.data = data;
         this.hora = hora;
         this.usuario = usuario;
         this.barbeiro = barbeiro;
         this.servico = servico;
-        this.pagamento = pagamento;
     }
 
     public Long getId() {
@@ -95,13 +93,6 @@ public class Agendamento {
         this.servico = servico;
     }
 
-    public Pagamento getPagamento() {
-        return pagamento;
-    }
-
-    public void setPagamento(Pagamento pagamento) {
-        this.pagamento = pagamento;
-    }
 
     @Override
     public boolean equals(Object o) {

@@ -25,6 +25,11 @@ public class AgendamentoController {
 
     @PostMapping()
     public  ResponseEntity<AgendamentoDTO> cadastrarAgendamento(@RequestBody AgendamentoDTO agendamentoDTO) {
+        System.out.println(agendamentoDTO.getData());
+        System.out.println(agendamentoDTO.getHora());
+        System.out.println(agendamentoDTO.getUsuario().getId());
+        System.out.println(agendamentoDTO.getBarbeiro().getId());
+        System.out.println(agendamentoDTO.getServico().getId());
         AgendamentoDTO agendamento = agendamentoService.cadastrarAgendamento(agendamentoDTO);
         return ResponseEntity.ok(agendamento);
     }

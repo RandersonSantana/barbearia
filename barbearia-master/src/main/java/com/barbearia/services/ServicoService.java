@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServicoService {
@@ -23,7 +24,7 @@ public class ServicoService {
         return converterServicoParaServicoDTO(servico);
     }
 
-    public ServicoDTO converterServicoParaServicoDTO(Servico servico){
+    public ServicoDTO converterServicoParaServicoDTO(Optional<Servico> servico){
         ServicoDTO servicoDTO = new ServicoDTO(servico.getId(),
                 servico.getNome(),
                 servico.getDescricao(),
@@ -45,13 +46,11 @@ public class ServicoService {
         }
         return servicoDTO;
     }
-    public ServicoDTO buscarServicoDTOPorId(Long id){
-        return converterServicoParaServicoDTO(buscarServicoPorId(id));
-    }
-    public Servico buscarServicoPorId(Long id){
+
+    public ServicoDTO buscarServicoPorId(Long id){
         Servico servico = servicoRepository.findById(id)
                 .orElseThrow(() -> new BusinesException(MSG_SERVICO));
-        return servico;
+        return converterServicoParaServicoDTO(servico);
     }
     public  ServicoDTO atualizarServico( ServicoDTO servicoDTO){
         servicoRepository.findById(servicoDTO.getId())

@@ -8,6 +8,8 @@ import com.barbearia.spec.UsuarioSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UsuarioService {
     private static final String MSG_CLIENTE = "Usuario não encontrado";
@@ -18,18 +20,15 @@ public class UsuarioService {
     @Autowired
     private UsuarioSpec usuarioSpec;
 
-    public UsuarioDTO buscarUsuarioDTOPorId(Long id){
-        return converterUsuarioParaUsuarioDTO(buscarUsuarioPorId(id));
-    }
 
-    public Usuario buscarUsuarioPorId(Long id){
+
+    public UsuarioDTO buscarUsuarioPorId(Long id){
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new BusinesException(MSG_CLIENTE));
-
-        return usuario;
+        return converterUsuarioParaUsuarioDTO(usuario);
     }
 
-    public UsuarioDTO converterUsuarioParaUsuarioDTO(Usuario usuario) {
+    public UsuarioDTO converterUsuarioParaUsuarioDTO(Optional<Usuario> usuario) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setId(usuario.getId());
         usuarioDTO.setNome(usuario.getNome());
