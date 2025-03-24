@@ -24,7 +24,7 @@ public class ServicoService {
         return converterServicoParaServicoDTO(servico);
     }
 
-    public ServicoDTO converterServicoParaServicoDTO(Optional<Servico> servico){
+    public ServicoDTO converterServicoParaServicoDTO(Servico servico){
         ServicoDTO servicoDTO = new ServicoDTO(servico.getId(),
                 servico.getNome(),
                 servico.getDescricao(),

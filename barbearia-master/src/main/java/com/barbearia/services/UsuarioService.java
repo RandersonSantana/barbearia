@@ -28,7 +28,7 @@ public class UsuarioService {
         return converterUsuarioParaUsuarioDTO(usuario);
     }
 
-    public UsuarioDTO converterUsuarioParaUsuarioDTO(Optional<Usuario> usuario) {
+    public UsuarioDTO converterUsuarioParaUsuarioDTO(Usuario usuario) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setId(usuario.getId());
         usuarioDTO.setNome(usuario.getNome());
@@ -40,6 +40,7 @@ public class UsuarioService {
 
     public Usuario converterUsuarioDTOParaUsuario(UsuarioDTO usuarioDTO){
         Usuario usuario = new Usuario();
+        usuario.setId(usuarioDTO.getId());
         usuario.setNome(usuarioDTO.getNome());
         usuario.setTelefone(usuarioDTO.getTelefone());
         usuario.setEmail(usuarioDTO.getEmail());

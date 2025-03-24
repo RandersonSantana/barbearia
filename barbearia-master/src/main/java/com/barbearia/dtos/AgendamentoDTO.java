@@ -24,7 +24,7 @@ public class AgendamentoDTO {
         this.id = id;
         this.data = data;
         this.hora = hora;
-        this.usuario = usuario;
+        this.usuario = usuarioDTO;
         this.barbeiro = barbeiroDTO;
         this.servico = servicoDTO;
     }

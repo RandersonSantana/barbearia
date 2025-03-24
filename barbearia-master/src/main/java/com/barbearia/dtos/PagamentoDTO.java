@@ -11,7 +11,7 @@ public class PagamentoDTO {
 
     private Long agendamentoId;
 
-    public PagamentoDTO(Long id, Double valor, String metodo, String status){}
+    public PagamentoDTO(){}
 
     public PagamentoDTO(Long id, Double valor, String metodo, String status, Long agendamentoId) {
         this.id = id;

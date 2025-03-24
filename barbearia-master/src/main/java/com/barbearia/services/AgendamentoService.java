@@ -48,19 +48,20 @@ public class AgendamentoService {
     private ServicoRepository servicoRepository;
 
     public AgendamentoDTO converterAgendamentoParaDTO(Agendamento agendamento) {
-        BarbeiroDTO barbeiroDTO = barbeiroService.converterBarbeiroParaBarbeiroDTO(
-                agendamento.getBarbeiro());
-        ServicoDTO servicoDTO = servicoService.converterServicoParaServicoDTO
-                (agendamento.getServico());
-        UsuarioDTO usuarioDTO = usuarioService.converterUsuarioParaUsuarioDTO
-                (agendamento.getUsuario());
 
-        AgendamentoDTO agendamentoDTO = new AgendamentoDTO(agendamento.getId(),
+        UsuarioDTO usuarioDTO = usuarioService.buscarUsuarioPorId(agendamento.getUsuario().getId());
+        BarbeiroDTO barbeiroDTO = barbeiroService.buscarBarbeiroPorId(agendamento.getBarbeiro().getId());
+        ServicoDTO servicoDTO = servicoService.buscarServicoPorId(agendamento.getServico().getId());
+
+        AgendamentoDTO agendamentoDTO = new AgendamentoDTO(
+                agendamento.getId(),
                 agendamento.getData(),
                 agendamento.getHora(),
                 usuarioDTO,
                 barbeiroDTO,
-                servicoDTO);
+                servicoDTO
+                );
+
         return agendamentoDTO;
     }
 
@@ -85,13 +86,14 @@ public class AgendamentoService {
     }
 
     public AgendamentoDTO cadastrarAgendamento(AgendamentoDTO agendamentoDTO) {
-        Optional<Usuario> usuario = usuarioRepository.findById(agendamentoDTO.getUsuario().getId());
-        Optional<Barbeiro> barbeiro = barbeiroRepository.findById(agendamentoDTO.getBarbeiro().getId());
-        Optional<Servico> servico = servicoRepository.findById(agendamentoDTO.getServico().getId());
+        UsuarioDTO usuarioDTO = usuarioService.buscarUsuarioPorId(agendamentoDTO.getUsuario().getId());
+        BarbeiroDTO barbeiroDTO = barbeiroService.buscarBarbeiroPorId(agendamentoDTO.getBarbeiro().getId());
+        ServicoDTO servicoDTO = servicoService.buscarServicoPorId(agendamentoDTO.getServico().getId());
 
-        agendamentoDTO.setUsuario(usuarioService.converterUsuarioParaUsuarioDTO(usuario));
-        agendamentoDTO.setBarbeiro(barbeiroService.converterBarbeiroParaBarbeiroDTO(barbeiro));
-        agendamentoDTO.setServico(servicoService.converterServicoParaServicoDTO(servico));
+
+        agendamentoDTO.setUsuario(usuarioDTO);
+        agendamentoDTO.setBarbeiro(barbeiroDTO);
+        agendamentoDTO.setServico(servicoDTO);
         Agendamento agendamento = converterAgendamentoDTOParaAgendamento(agendamentoDTO);
         System.out.println(agendamento);
         agendamento = agendamentoRepository.save(agendamento);

@@ -19,7 +19,7 @@ public class BarbeiroService {
     private BarbeiroRepository barbeiroRepository;
 
 
-    public BarbeiroDTO converterBarbeiroParaBarbeiroDTO(Optional<Barbeiro> barbeiro){
+    public BarbeiroDTO converterBarbeiroParaBarbeiroDTO(Barbeiro barbeiro){
         BarbeiroDTO barbeiroDTO = new BarbeiroDTO();
         barbeiroDTO.setId(barbeiro.getId());
         barbeiroDTO.setNome(barbeiro.getNome());
