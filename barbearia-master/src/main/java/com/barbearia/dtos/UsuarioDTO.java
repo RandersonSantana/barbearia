@@ -24,6 +24,4 @@ public class UsuarioDTO {
         this.email = email;
         this.perfis = perfis;
     }
-
-
 }

@@ -1,7 +1,9 @@
 package com.barbearia.services;
 
+import com.barbearia.dtos.AgendamentoDTO;
 import com.barbearia.dtos.BarbeiroDTO;
 import com.barbearia.exceptions.BusinesException;
+import com.barbearia.models.Agendamento;
 import com.barbearia.models.Barbeiro;
 import com.barbearia.repositories.BarbeiroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +22,22 @@ public class BarbeiroService {
 
 
     public BarbeiroDTO converterBarbeiroParaBarbeiroDTO(Barbeiro barbeiro){
-        BarbeiroDTO barbeiroDTO = new BarbeiroDTO();
-        barbeiroDTO.setId(barbeiro.getId());
-        barbeiroDTO.setNome(barbeiro.getNome());
-        barbeiroDTO.setTelefone(barbeiro.getTelefone());
-        barbeiroDTO.setEmail(barbeiro.getEmail());
-        barbeiroDTO.setAtivo(barbeiro.isAtivo());
+        BarbeiroDTO barbeiroDTO = new BarbeiroDTO(barbeiro.getId(),
+                barbeiro.getNome(),
+                barbeiro.getTelefone(),
+                barbeiro.getEmail(),
+                barbeiro.isAtivo(),
+                barbeiro.getPerfis());
+
         return barbeiroDTO;
     }
     public Barbeiro converterBarbeiroDTOParaBarbeiro(BarbeiroDTO barbeiroDTO){
-        Barbeiro barbeiro = new Barbeiro();
-        barbeiro.setId(barbeiroDTO.getId());
-        barbeiro.setNome(barbeiroDTO.getNome());
-        barbeiro.setTelefone(barbeiroDTO.getTelefone());
-        barbeiro.setEmail(barbeiroDTO.getEmail());
-        barbeiro.setAtivo(barbeiroDTO.isAtivo());
+        Barbeiro barbeiro = new Barbeiro(barbeiroDTO.getId(),
+                barbeiroDTO.getNome(),
+                barbeiroDTO.getTelefone(),
+                barbeiroDTO.getEmail(),
+                barbeiroDTO.isAtivo(),
+                barbeiroDTO.getPerfis());
         return barbeiro;
     }
     public BarbeiroDTO cadastrarBarbeiro(BarbeiroDTO barbeiroDTO){

@@ -10,17 +10,19 @@ public class BarbeiroDTO {
     private String telefone;
     private String email;
     private boolean ativo;
-    private List<Long> agendamentosIds;
+    private List<Perfil> perfis;
+    private AgendamentoDTO agendamentosIds;
 
-    public BarbeiroDTO() {}
+        public BarbeiroDTO() {}
 
-    public BarbeiroDTO(Long id, String nome, String telefone, String email, boolean ativo, List<Long> agendamentosIds) {
+
+    public BarbeiroDTO(Long id, String nome, String telefone, String email, boolean ativo, List<Perfil> perfis) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
         this.ativo = ativo;
-        this.agendamentosIds = agendamentosIds;
+        this.perfis = perfis;
     }
 
     public Long getId() {
@@ -63,11 +65,12 @@ public class BarbeiroDTO {
         this.ativo = ativo;
     }
 
-    public List<Long> getAgendamentosIds() {
-        return agendamentosIds;
+    public List<Perfil> getPerfis() {
+        return perfis;
     }
 
-    public void setAgendamentosIds(List<Long> agendamentosIds) {
-        this.agendamentosIds = agendamentosIds;
+    public void setPerfis(List<Perfil> perfis) {
+        this.perfis = perfis;
     }
+
 }

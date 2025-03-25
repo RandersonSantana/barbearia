@@ -5,14 +5,10 @@ import com.barbearia.exceptions.BusinesException;
 import com.barbearia.models.*;
 
 import com.barbearia.repositories.AgendamentoRepository;
-import com.barbearia.repositories.BarbeiroRepository;
-import com.barbearia.repositories.ServicoRepository;
-import com.barbearia.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

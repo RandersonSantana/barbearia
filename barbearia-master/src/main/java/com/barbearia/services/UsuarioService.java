@@ -45,8 +45,6 @@ public class UsuarioService {
         usuario.setTelefone(usuarioDTO.getTelefone());
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setPerfis(usuarioDTO.getPerfis());
-
-
         return usuario;
     }
     public UsuarioDTO cadastrarUsuario(UsuarioDTO usuarioDTO){
