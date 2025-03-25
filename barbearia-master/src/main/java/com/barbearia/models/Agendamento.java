@@ -36,13 +36,14 @@ public class Agendamento {
     public Agendamento() {
     }
 
-    public Agendamento(Long id, Date data, LocalTime hora, Usuario usuario, Barbeiro barbeiro, Servico servico) {
+    public Agendamento(Long id, Date data, LocalTime hora, Usuario usuario, Barbeiro barbeiro, Servico servico, Pagamento pagamento) {
         this.id = id;
         this.data = data;
         this.hora = hora;
         this.usuario = usuario;
         this.barbeiro = barbeiro;
         this.servico = servico;
+        this.pagamento = pagamento;
     }
 
     public Long getId() {
@@ -91,6 +92,9 @@ public class Agendamento {
 
     public void setServico(Servico servico) {
         this.servico = servico;
+    }
+    public Pagamento getPagamento() {
+        return pagamento;
     }
 
 

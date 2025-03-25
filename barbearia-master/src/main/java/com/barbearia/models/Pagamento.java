@@ -21,13 +21,15 @@ public class Pagamento {
     @JoinColumn(name = "agendamento_id", nullable = false)
     private Agendamento agendamento;
 
-    public Pagamento(){}
+    public Pagamento() {
+    }
 
-    public Pagamento(Long id, Double valor, String metodo, String status) {
+    public Pagamento(Long id, Double valor, String metodo, String status, Agendamento agendamento) {
         this.id = id;
         this.valor = valor;
         this.metodo = metodo;
         this.status = status;
+        this.agendamento = agendamento;
     }
 
     public Long getId() {
@@ -62,16 +64,23 @@ public class Pagamento {
         this.status = status;
     }
 
+    public Agendamento getAgendamento() {
+        return agendamento;
+    }
+
+    public void setAgendamento(Agendamento agendamento) {
+        this.agendamento = agendamento;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pagamento pagamento = (Pagamento) o;
-        return Objects.equals(id, pagamento.id);
+        return Objects.equals(id, pagamento.id) && Objects.equals(valor, pagamento.valor) && Objects.equals(metodo, pagamento.metodo) && Objects.equals(status, pagamento.status) && Objects.equals(agendamento, pagamento.agendamento);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hash(id, valor, metodo, status, agendamento);
     }
 }

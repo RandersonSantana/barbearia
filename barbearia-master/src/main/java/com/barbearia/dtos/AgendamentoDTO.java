@@ -17,16 +17,18 @@ public class AgendamentoDTO {
     private UsuarioDTO usuario;
     private BarbeiroDTO barbeiro;
     private ServicoDTO servico;
+    private PagamentoDTO pagamento;
 
     public AgendamentoDTO() {}
 
-    public AgendamentoDTO(Long id, Date data, LocalTime hora, UsuarioDTO usuarioDTO, BarbeiroDTO barbeiroDTO, ServicoDTO servicoDTO) {
+    public AgendamentoDTO(Long id, Date data, LocalTime hora, UsuarioDTO usuarioDTO, BarbeiroDTO barbeiroDTO, ServicoDTO servicoDTO, PagamentoDTO pagamentoDTO) {
         this.id = id;
         this.data = data;
         this.hora = hora;
         this.usuario = usuarioDTO;
         this.barbeiro = barbeiroDTO;
         this.servico = servicoDTO;
+        this.pagamento = pagamentoDTO;
     }
 
     public BarbeiroDTO getBarbeiroId() {

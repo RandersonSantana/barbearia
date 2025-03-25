@@ -1,15 +1,9 @@
 package com.barbearia.services;
 
-import com.barbearia.dtos.AgendamentoDTO;
-import com.barbearia.dtos.BarbeiroDTO;
-import com.barbearia.dtos.ServicoDTO;
-import com.barbearia.dtos.UsuarioDTO;
+import com.barbearia.dtos.*;
 import com.barbearia.exceptions.BusinesException;
-import com.barbearia.models.Agendamento;
-import com.barbearia.models.Barbeiro;
-import com.barbearia.models.Servico;
+import com.barbearia.models.*;
 
-import com.barbearia.models.Usuario;
 import com.barbearia.repositories.AgendamentoRepository;
 import com.barbearia.repositories.BarbeiroRepository;
 import com.barbearia.repositories.ServicoRepository;
@@ -39,19 +33,14 @@ public class AgendamentoService {
     private UsuarioService usuarioService;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @Autowired
-    private BarbeiroRepository barbeiroRepository;
-
-    @Autowired
-    private ServicoRepository servicoRepository;
+    private PagamentoService pagamentoService;
 
     public AgendamentoDTO converterAgendamentoParaDTO(Agendamento agendamento) {
 
         UsuarioDTO usuarioDTO = usuarioService.buscarUsuarioPorId(agendamento.getUsuario().getId());
         BarbeiroDTO barbeiroDTO = barbeiroService.buscarBarbeiroPorId(agendamento.getBarbeiro().getId());
         ServicoDTO servicoDTO = servicoService.buscarServicoPorId(agendamento.getServico().getId());
+        PagamentoDTO pagamentoDTO = pagamentoService.buscarPagamentoPorId(agendamento.getPagamento().getId());
 
         AgendamentoDTO agendamentoDTO = new AgendamentoDTO(
                 agendamento.getId(),
@@ -59,7 +48,8 @@ public class AgendamentoService {
                 agendamento.getHora(),
                 usuarioDTO,
                 barbeiroDTO,
-                servicoDTO
+                servicoDTO,
+                pagamentoDTO
                 );
 
         return agendamentoDTO;
@@ -76,12 +66,16 @@ public class AgendamentoService {
         Servico servico = servicoService.converterServicoDTOParaServico
                 (agendamentoDTO.getServico());
 
+        Pagamento pagamento = pagamentoService.converterPagamentoDTOParaPagamento
+                (agendamentoDTO.getPagamento());
+
         Agendamento agendamento = new Agendamento(agendamentoDTO.getId(),
                 agendamentoDTO.getData(),
                 agendamentoDTO.getHora(),
                 usuario,
                 barbeiro,
-                servico);
+                servico,
+                pagamento);
         return agendamento;
     }
 
