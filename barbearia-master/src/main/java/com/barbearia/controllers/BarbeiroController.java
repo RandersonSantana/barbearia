@@ -38,8 +38,4 @@ public class BarbeiroController {
         barbeiroService.deletarBarbeiro(barbeiroDTO.getId());
         return ResponseEntity.noContent().build();
     }
-    @GetMapping("/buscar")
-    public ResponseEntity<BarbeiroDTO> buscarBarbeiroPorNome(@RequestParam String nome){
-        return ResponseEntity.ok(barbeiroService.buscarBarbeiroPorNome(nome));
-    }
 }

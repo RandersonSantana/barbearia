@@ -70,13 +70,8 @@ public class BarbeiroService {
         return converterBarbeiroParaBarbeiroDTO(barbeiro);
     }
 
-
     public  void deletarBarbeiro(Long id){
         barbeiroRepository.deleteById(id);
     }
 
-    public BarbeiroDTO buscarBarbeiroPorNome(String nome){
-        Barbeiro barbeiro = barbeiroRepository.findByNome(nome).orElseThrow(() -> new BusinesException(MSG_BARBEIRO));
-        return converterBarbeiroParaBarbeiroDTO(barbeiro);
-    }
 }

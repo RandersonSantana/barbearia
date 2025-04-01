@@ -28,15 +28,11 @@ public class AgendamentoService {
     @Autowired
     private UsuarioService usuarioService;
 
-    @Autowired
-    private PagamentoService pagamentoService;
-
     public AgendamentoDTO converterAgendamentoParaDTO(Agendamento agendamento) {
 
         UsuarioDTO usuarioDTO = usuarioService.buscarUsuarioPorId(agendamento.getUsuario().getId());
         BarbeiroDTO barbeiroDTO = barbeiroService.buscarBarbeiroPorId(agendamento.getBarbeiro().getId());
         ServicoDTO servicoDTO = servicoService.buscarServicoPorId(agendamento.getServico().getId());
-        PagamentoDTO pagamentoDTO = pagamentoService.buscarPagamentoPorId(agendamento.getPagamento().getId());
 
         AgendamentoDTO agendamentoDTO = new AgendamentoDTO(
                 agendamento.getId(),
@@ -44,8 +40,7 @@ public class AgendamentoService {
                 agendamento.getHora(),
                 usuarioDTO,
                 barbeiroDTO,
-                servicoDTO,
-                pagamentoDTO
+                servicoDTO
                 );
 
         return agendamentoDTO;
@@ -62,16 +57,12 @@ public class AgendamentoService {
         Servico servico = servicoService.converterServicoDTOParaServico
                 (agendamentoDTO.getServico());
 
-        Pagamento pagamento = pagamentoService.converterPagamentoDTOParaPagamento
-                (agendamentoDTO.getPagamento());
-
         Agendamento agendamento = new Agendamento(agendamentoDTO.getId(),
                 agendamentoDTO.getData(),
                 agendamentoDTO.getHora(),
                 usuario,
                 barbeiro,
-                servico,
-                pagamento);
+                servico);
         return agendamento;
     }
 

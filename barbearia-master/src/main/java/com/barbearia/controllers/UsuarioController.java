@@ -23,7 +23,7 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.cadastrarUsuario(usuarioDTO));
     }
     @PutMapping()
-    public ResponseEntity<UsuarioDTO> atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
+    public ResponseEntity<UsuarioDTO> atualizarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
         return ResponseEntity.ok(usuarioService.atualizarUsuario(usuarioDTO));
     }
     @DeleteMapping(value = "/{id}")
