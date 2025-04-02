@@ -23,6 +23,10 @@ public class BarbeiroController {
     public ResponseEntity<List<BarbeiroDTO>> buscarTodosBarbeiros(){
         return ResponseEntity.ok(barbeiroService.listarTodosBarbeiros());
     }
+    @GetMapping("/buscar")
+    public ResponseEntity<BarbeiroDTO> buscarBarbeiroPorNome(@RequestParam String nome){
+        return ResponseEntity.ok(barbeiroService.buscarBarbeiroPorNome(nome));
+    }
 
     @PostMapping()
     public  ResponseEntity<BarbeiroDTO> cadastrarBarbeiro(@RequestBody BarbeiroDTO barbeiroDTO) {

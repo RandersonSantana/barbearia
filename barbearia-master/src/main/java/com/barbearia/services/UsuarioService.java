@@ -4,7 +4,6 @@ import com.barbearia.dtos.UsuarioDTO;
 import com.barbearia.exceptions.BusinesException;
 import com.barbearia.models.Usuario;
 import com.barbearia.repositories.UsuarioRepository;
-import com.barbearia.spec.UsuarioSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +16,6 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private UsuarioSpec usuarioSpec;
 
 
 
@@ -51,7 +48,6 @@ public class UsuarioService {
 
 
         Usuario UsuarioEmail = usuarioRepository.findByEmail(usuarioDTO.getEmail());
-        usuarioSpec.verificarSeExisteUsuarioComEmailDuplicado(UsuarioEmail);
 
         Usuario usuario = converterUsuarioDTOParaUsuario(usuarioDTO);
         usuario = usuarioRepository.save(usuario);
@@ -61,9 +57,6 @@ public class UsuarioService {
     public UsuarioDTO atualizarUsuario(UsuarioDTO usuarioDTO){
         Usuario usuario = usuarioRepository.findById(usuarioDTO.getId())
                 .orElseThrow(() -> new BusinesException(MSG_CLIENTE));
-
-        usuarioSpec.verificarEmailEmUso(usuario, usuarioDTO);
-        usuarioSpec.verificarCampoIdNulo(usuarioDTO.getId());
 
         usuario= converterUsuarioDTOParaUsuario(usuarioDTO);
         usuarioRepository.save(usuario);
